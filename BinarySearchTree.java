@@ -69,7 +69,30 @@ public class BinarySearchTree {
         }
     }
 
-    // inorder traversal
+    public Node recursiveAdd(Node head, int data) {
+        if (head == null) {
+            head = new Node(data);
+            return head;
+        }
+        if (data <= head.getVal()) {
+            head.left = recursiveAdd(head.left, data);
+        } else {
+            head.right = recursiveAdd(head.right, data);
+        }
+        return head;
+    }
+
+    public void printLeafNodes(Node head) {
+        if (head.left == null && head.right == null && head != null) {
+            System.out.println(head.getVal());
+        }
+        if (head.left != null) {
+            printLeafNodes(head.left);
+        }
+        if (head.right != null) {
+            printLeafNodes(head.right);
+        }
+    }
 
     public static void main(String[] args) {
         Node n1 = new Node(1);
@@ -79,8 +102,13 @@ public class BinarySearchTree {
         Node n5 = new Node(5);
 
         BinarySearchTree bst = new BinarySearchTree(n3);
-        bst.add(n2);
+        // bst.add(n2);
+        // System.out.println(bst.head.getVal());
+        // System.out.println(bst.head.getLeft().getVal());
+        bst.recursiveAdd(n3, 2);
         System.out.println(bst.head.getVal());
         System.out.println(bst.head.getLeft().getVal());
+        bst.recursiveAdd(n3, 4);
+        bst.printLeafNodes(bst.head);
     }
 }
